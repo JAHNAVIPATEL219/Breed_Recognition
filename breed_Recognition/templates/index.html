@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Breed Recognition</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #cce6ff, #e6f2ff);
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .container {
+            margin-top: 60px;
+        }
+
+        h1 {
+            color: #003366;
+            font-size: 36px;
+        }
+
+        form {
+            margin: 30px 0;
+        }
+
+        input[type="file"] {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 12px 25px;
+            margin-left: 10px;
+            background: #0073e6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #005bb5;
+        }
+
+        .result-box {
+            margin-top: 40px;
+            display: inline-block;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .result-box h2 {
+            color: #003366;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            font-size: 20px;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .footer {
+            margin-top: 60px;
+            color: gray;
+            font-size: 14px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+    <h1>🐄 Cattle & Buffalo Breed Recognition</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if predictions %}
+        <div class="result-box">
+            <h2>🔍 Top Predictions</h2>
+            <ul>
+                {% for p in predictions %}
+                    <li>{{ p.class }} — {{ p.confidence }}%</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <div class="footer">
+        <p>Powered by Deep Learning (MobileNetV2)</p>
+    </div>
+</div>
+
+</body>
+</html>
